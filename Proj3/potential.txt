@@ -1,0 +1,44 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+WITH AvatarSuccessQuests(login, name, race, theme, realm, day) AS (
+    SELECT A.login, A.name, A.race, Q.theme, Q.realm, Q.day
+    FROM Avatar A, Actor Act, Visit V, Quest Q
+    WHERE Act.login = V.login 
+      AND Act.realm = V.realm
+      AND Act.day   = V.day --Actor to Visit
+
+      AND V.login = A.login 
+      AND V.name  = A.name --Visit to Avatar
+
+      AND Act.theme = Q.theme
+      AND Act.realm = Q.realm
+      AND Act.day   = Q.day   --Actor to Quest
+
+      AND Q.succeeded IS NOT NULL
+    ORDER BY login, day
+), 
+MaxLootPerQuest(theme, realm, day, max) AS (
+    SELECT Q.theme, Q.realm, Q.day, MAX(T.sql) as max
+    FROM Loot L, Treasure T, Quest Q
+    WHERE L.treasure = T.treasure --Loot to treasuer
+      AND L.theme = Q.theme
+      AND L.realm = Q.realm
+      AND L.day   = Q.day  --Loot to Quest
+    GROUP BY Q.theme, Q.realm, Q.day
+)
+
+SELECT login, name, race, SUM(max) as earned, COUNT(max) as quests
+FROM AvatarSuccessQuests ASQ
+INNER JOIN MaxLootPerQuest M
+    ON      ASQ.theme = M.theme
+        AND ASQ.realm = M.realm 
+        AND ASQ.day   = M.day
+GROUP BY login, name, race
+    UNION
+SELECT A.login, A.name, A.race, 0 as earned, 0 as quests     --LOSERS
+FROM Avatar A
+WHERE (A.login, A.name, A.race) NOT IN (SELECT login, name, race FROM AvatarSuccessQuests )
+ORDER BY login, name;
+
+

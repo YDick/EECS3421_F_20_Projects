@@ -1,0 +1,17 @@
+--Judith Dick
+--jdick 215045081 
+--EECS3421B Project 2 for Wenxiao Fu
+--Oct 30 2020
+--contact tracing
+ 
+ 
+ person   |      timeslot       |  testtype  |    result     | testcentre | offered 
+-----------+---------------------+------------+---------------+------------+---------
+ 111111111 | 2020-01-01 01:15:00 | brain swab |               | York South | yes
+ 221221221 | 2020-01-01 01:15:00 | nose swab  | cemented door | York North | yes
+ 221221221 | 2020-01-02 00:45:00 | nose swab  | death         | York North | yes
+ 331331331 | 2020-01-02 00:45:00 | rapid test | death         | York East  | yes
+ 441441441 | 2020-01-02 00:45:00 | rapid test |               | York East  | yes
+ 551551551 | 2020-01-02 01:00:00 | rapid test | cemented door | York East  | yes
+(6 rows)
+

@@ -1,0 +1,13 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+SELECT DISTINCT P.login, P.name, P.gender, Avatars
+FROM Player P, Avatar A, (
+    SELECT login, count(*) as Avatars
+    FROM Avatar
+    GROUP BY login
+) as AN
+WHERE P.gender <> A.gender
+  AND P.login = A.login
+  AND P.login = AN.login
+ORDER BY login;

@@ -1,0 +1,67 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+WITH AvatarQuests(login, name, realm, day, theme) AS (
+    SELECT A.login, A.name, Q.realm, Q.day, Q.theme
+    FROM Avatar A, Quest Q, Visit V, Actor Act
+    WHERE Act.theme = Q.theme
+      AND Act.realm = Q.realm
+      AND Act.day = Q.day --Actor to Quest
+
+      AND Act.login = V.login 
+      AND Act.realm = V.realm
+      AND Act.day = V.day --Actor to Visit
+
+      AND V.name = A.name
+      AND V.login = A.login --Visit to Avatar
+    ORDER BY day, realm
+),
+CountQuests(login, name, realm, quests) AS (
+  SELECT AQ.login, AQ.name, AQ.realm, COUNT(day) as quests
+  FROM AvatarQuests AQ
+  GROUP BY AQ.login, AQ.name, AQ.realm
+),
+AvatarQuestsCount (login, name, realm, day, theme, quests) AS (
+    SELECT AQ.login, AQ.name, AQ.realm, AQ.day, AQ.theme, CQ.quests
+    FROM CountQuests CQ, AvatarQuests AQ
+    WHERE CQ.login = AQ.login 
+      AND CQ.name = AQ.name 
+      AND CQ.realm = AQ.realm
+)
+
+SELECT AQ1.login AS companion1, AQ1.name AS fname, AQ1.realm, AQ2.login AS companion2, AQ2.name AS lname
+FROM AvatarQuestsCount AQ1, AvatarQuestsCount AQ2
+WHERE AQ1.login < AQ2.login
+
+  AND AQ1.realm = AQ2.realm
+  AND AQ1.day   = AQ2.day
+  AND AQ1.theme = AQ2.theme
+
+  AND AQ1.quests = AQ2.quests
+  EXCEPT
+    (
+        --Not friends in that realm (doubled)
+    SELECT AQ1.login AS companion1, AQ1.name AS fname, AQ1.realm, AQ2.login AS companion2, AQ2.name AS lname
+    FROM AvatarQuestsCount AQ1, AvatarQuestsCount AQ2
+    WHERE AQ1.login <> AQ2.login
+      AND AQ1.name <> AQ2.name
+      AND AQ1.realm = AQ2.realm
+
+      AND (
+        AQ1.day NOT IN (
+        SELECT day 
+        FROM AvatarQuestsCount 
+        WHERE AQ2.name = name
+          AND AQ2.login = login
+          AND AQ2.realm = realm
+        )
+      OR AQ1.theme NOT IN (
+        SELECT theme 
+        FROM AvatarQuestsCount 
+        WHERE AQ2.name = name
+          AND AQ2.login = login
+          AND AQ2.realm = realm
+        )
+      )
+    )
+ORDER BY realm, companion1, fname, companion2, lname;

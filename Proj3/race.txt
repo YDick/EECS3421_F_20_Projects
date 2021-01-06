@@ -1,0 +1,38 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+WITH scripByAvatarRealm(avatar, gender, race, realm, sql) AS (
+    SELECT Av.name, Av.gender, Av.race, L.realm, SUM(T.sql)
+    FROM  Treasure T, Loot L, Visit V, Avatar Av
+    WHERE L.treasure = T.treasure --loot to treasure
+
+      AND L.login = V.login
+      AND L.realm = V.realm
+      AND L.day = V.day --Loot to Visit (bypass Actor)
+
+      AND V.login = Av.login
+      AND V.name = Av.name --Visit to Avatar
+
+    GROUP BY Av.login, Av.name, L.realm
+),
+scripTotalByRaceGenderRealm(race, gender, realm, total) AS (
+    SELECT S.race, S.gender, S.realm, SUM(S.sql) AS total
+    FROM scripByAvatarRealm S
+    GROUP BY S.race, S.gender, S.realm
+    ORDER BY race, realm
+),
+maxRealmRace(realm, race, gender, total) AS (
+    SELECT S.realm, S.race, S.gender, S.total
+    FROM   scripTotalByRaceGenderRealm S
+    EXCEPT (
+      SELECT DISTINCT S1.realm, S1.race, S1.gender, S1.total
+      FROM scripTotalByRaceGenderRealm S1, scripTotalByRaceGenderRealm S2
+      WHERE S1.race = S2.race
+        AND S1.realm = S2.realm
+        AND S1.gender <> S2.gender
+        AND S1.total < S2.total
+    )
+    ORDER BY realm, race, gender
+)
+SELECT * from maxRealmRace;
+

@@ -1,0 +1,7 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+SELECT login, name, gender, address, joined
+FROM Player as p
+WHERE p.name ILIKE CONCAT('%', p.login, '%')
+ORDER BY login ASC;

@@ -1,0 +1,10 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+SELECT DISTINCT a1.login, P.name, a1.day, a1.realm, a1.theme
+FROM Actor as a1, Actor as a2, Player as P
+WHERE   a1.login = a2.login 
+    AND a1.day   = a2.day 
+    AND (a1.theme <> a2.theme OR a1.realm <> a2.realm) --diff realm is kinda extra
+    AND a1.login = P.login
+ORDER BY login, name, day, realm, theme;

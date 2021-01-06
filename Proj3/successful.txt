@@ -1,0 +1,16 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+WITH Success(theme) AS (
+    SELECT DISTINCT theme
+    FROM Quest
+    EXCEPT
+    (SELECT theme
+    FROM Quest
+    WHERE succeeded IS NULL)
+)
+SELECT Q.theme, count(*) as Quests
+FROM Quest Q, Success S
+WHERE Q.theme = S.theme
+GROUP BY Q.theme
+ORDER BY Q.theme;

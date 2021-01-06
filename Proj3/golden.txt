@@ -1,0 +1,9 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+SELECT DISTINCT l.realm, l.day, l.theme
+FROM loot as l, treasure as t
+WHERE l.treasure = t.treasure
+  AND t.treasure ILIKE '%Gold%'
+  AND l.login IS NOT NULL   
+ORDER BY day, realm, theme;

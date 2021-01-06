@@ -1,0 +1,25 @@
+--EECS3421B Project 3 11/24/2020
+--JDick 215045081
+
+WITH numVis(login, realm, visits) AS (
+    SELECT V.login, V.realm, count(*) as Visits
+    FROM Visit as V
+    GROUP BY V.login, V.realm
+    ORDER BY V.login
+),
+dayDiff(login, realm,  diff) AS (
+    SELECT V1.login, V1.realm, (MAX(V1.day) - MIN(V1.day))::FLOAT AS diff
+    FROM Visit as V1, numVis as NV
+    WHERE NV.visits > 1
+    GROUP BY V1.login, V1.realm
+    ORDER BY login
+)
+SELECT NV.login, NV.realm, NV.visits, (
+  CAST (DD.diff/ (NV.visits - 1) AS NUMERIC(5, 2) ) 
+) AS frequency
+FROM numVis as NV, dayDiff DD
+WHERE NV.visits > 1
+  AND DD.login = NV.login
+  AND DD.realm = NV.realm
+ORDER BY login, realm;
+

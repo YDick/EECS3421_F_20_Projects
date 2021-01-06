@@ -1,0 +1,20 @@
+20-11-22 16:42:40.7500837 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-22 17:00:55.9404383 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-22 17:31:30.6989120 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-22 18:24:43.2456054 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-22 19:30:09.7540190 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-22 19:42:27.4611155 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.IntelliCode.SQL.PythiaService.GetRecommendationsAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken cancellationToken)
+   at Microsoft.VisualStudio.IntelliCode.SQL.CompletionExtension.HandleCompletionAsync(ConnectionInfo connInfo, ScriptDocumentInfo scriptDocumentInfo, CompletionItem[] completions, CancellationToken token)
+20-11-23 19:49:15.0573239 pid:31403 tid:10 sqltools Critical: 0 : Exception in IntelliCode extension for Microsoft SQL Language Server: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.VisualStudio.
