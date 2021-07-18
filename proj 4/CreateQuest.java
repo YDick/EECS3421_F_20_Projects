@@ -18,7 +18,7 @@ import pgpass.*; //home
 public class CreateQuest {
     private Connection conDB;        // Connection to the database system.
     private String url;              // URL: Which database?
-    private String user = "jdick"; // Database user account
+    private String user = "jdick";   // Database user account
 
     private Date day;
     private String realm;
@@ -48,7 +48,7 @@ public class CreateQuest {
         //url = "jdbc:postgresql://db:5432/<dbname>?currentSchema=yrb";
         url = "jdbc:postgresql://db:5432/";
 
-        // Check args?
+        // Check args
         if (args.length < 4) {
             // Don't know what's wanted.  Bail.
             System.out.println("\nParams: CreateQuest <day> <realm> <theme> <amount> [<user>] [seed]");
@@ -76,7 +76,7 @@ public class CreateQuest {
             try {
                 amount = Integer.parseInt(args[3]);
             } catch (Exception e) {
-                System.out.println("\nUsage: java Integer amount");
+                System.out.println("\nUsage: Java Integer amount");
                 System.out.println("Provide an amount.");
                 System.exit(0);
             }
@@ -92,8 +92,6 @@ public class CreateQuest {
                 //set seed to random number
                 Random random = new Random();
                 seed = random.nextFloat() * 2 - 1;;
-                // System.out.println("random seed = " );
-                // System.out.println(seed);
             }
 
 
